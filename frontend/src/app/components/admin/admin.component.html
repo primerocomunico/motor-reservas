@@ -1,0 +1,34 @@
+<section id="cover">
+  <div id="cover-caption">
+    <div id="container" class="container">
+      <div class="row text-white">
+        <div class="col-sm-6 offset-sm-3 text-center">
+          <h1 class="display-4">Booking Admin</h1>
+          <h1 class="display-4">Access</h1>
+          <div *ngIf="_auth.flagAlert == true" class="alert alert-danger text-center" role="alert">
+            User name or Password are wrong, please try again
+          </div>
+          <div class="info-form">
+            <div action="" class="form-inlin justify-content-center">
+              <div class="form-group">
+                <label class="sr-only">User name</label>
+                <input type="text" class="form-control" placeholder="User Name" [(ngModel)]="userName">
+              </div>
+              <div class="form-group">
+                <label class="sr-only">Password</label>
+                <input type="password" class="form-control" placeholder="Password"
+                  [(ngModel)]="userPassword">
+              </div>
+              <button type="submit" class="btn btn-primary" (click)="accessUser()">okay, go!</button>
+          </div>
+          </div>
+          <br>
+
+          <a href="booking" class="btn btn-outline-secondary btn-sm" role="button">
+            Visit Guest Booking
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

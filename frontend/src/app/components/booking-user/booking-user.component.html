@@ -1,0 +1,581 @@
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg" width="30"
+      height="30" class="d-inline-block align-top" alt="">
+    Bootstrap
+  </a>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="booking" target="_blank">Client form</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="adminbooking">Reload page</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="mailto:sergio@primerocomunico.es">Helpdesk</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link"><i class="far fa-user-circle"></i> Hello! {{userName}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="closeUser()"><i class="fas fa-sign-out-alt"></i> Log out</a>
+        </li>
+      </ul>
+    </span>
+  </div>
+</nav>
+
+<div class="container">
+
+  <br />
+
+  <!-- ACCORDION -->
+
+  <div class="accordion" id="accordionExample">
+
+    <!-- Componente de reservas PENDIENTES -->
+
+    <section class="pending">
+      <div class="" id="headingOne">
+        <h2 class="mb-0">
+          <div class="centrar">
+            <button class="btn btn-danger botones" type="button" data-toggle="collapse"
+              data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              PENDING APPROVAL
+            </button>
+          </div>
+        </h2>
+      </div>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+        data-parent="#accordionExample">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>PENDING APPROVAL</h1>
+          </div>
+          <div class="col-12" *ngFor="let infoBooking of _data.data; let i = index">
+            <div class="showing-cards"
+              *ngIf="infoBooking.bookingPayment == false && infoBooking.bookingApproved == false && infoBooking.bookingStored == false">
+
+              <!-- Card -->
+              <div class="card">
+                <div class="row">
+                  <!-- Card image -->
+                  <div class="col-4">
+                    <div class="view overlay image" *ngIf="infoBooking.bookingVilla == 'Biclén'">
+                      <img class="card-img-top" src="assets/biclen.jpg" alt="Card image cap">
+                    </div>
+                    <div class="view overlay image" *ngIf="infoBooking.bookingVilla == 'Daniela'">
+                      <img class="card-img-top" src="assets/daniela.jpg" alt="Card image cap">
+                    </div>
+                    <div class="col-12 btn-position">
+                      <button type="button" class="btn btn-info btn-style"
+                        (click)="getBooking(infoBooking._id)">EDIT</button>
+                    </div>
+                  </div>
+                  <!-- Card content -->
+                  <div class="card-body">
+                    <div class="col-10">
+                      <!-- Title -->
+                      <h4 class="card-title"><i class="far fa-id-card"></i><b>Guest Name:</b>
+                        {{infoBooking.bookingFullName}}</h4>
+                      <hr>
+                      <!-- Text -->
+                      <div class="col bg-secondary text-white">
+                        <div class="row">
+                          <div class="col-6">
+                            <p class="vcenter"><i class="fas fa-plane-arrival"></i> <b>Arrival:</b>
+                              {{infoBooking.bookingArrival}}</p>
+                          </div>
+                          <div class="col-6">
+                            <p><i class="fas fa-plane-departure vcenter"></i> <b>Departure:</b>
+                              {{infoBooking.bookingDeparture}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <ul class="list-group size-ul">
+                        <li class="list-group-item"><i class="fas fa-envelope-open-text"></i>
+                          <b>Mail: </b>
+                          <a
+                            href="mailto:{{infoBooking.bookingMail}}">{{infoBooking.bookingMail}}</a>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-phone-square"></i>
+                          <b>Phone: </b> <a href="tel:{{infoBooking.bookingPhone}}">
+                            {{infoBooking.bookingPhone}}</a>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-home"></i> <b>Villa:</b>
+                          {{infoBooking.bookingVilla}}</li>
+                        <li class="list-group-item"><i class="fas fa-users"></i> <b>Guests:</b>
+                          {{infoBooking.bookingGuests}}</li>
+                        <li class="list-group-item"><i class="fas fa-comments"></i> <b>Comments:</b>
+                          {{infoBooking.bookingComments}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Componente de reservas PAGO -->
+
+    <section class="payment">
+      <div class="" id="headingTwo">
+        <h2 class="mb-0">
+          <div class="centrar">
+            <button class="btn btn-warning botones" type="button" data-toggle="collapse"
+              data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              PAYMENT PROCESS
+            </button>
+          </div>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+        data-parent="#accordionExample">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>PAYMENT PROCESS</h1>
+          </div>
+          <div class="col-12" *ngFor="let infoBooking of _data.data; let i = index">
+            <div class="showing-cards"
+              *ngIf="infoBooking.bookingPayment == true && infoBooking.bookingApproved == false && infoBooking.bookingStored == false">
+              <!-- Card -->
+              <div class="card">
+                <div class="row">
+                  <!-- Card image -->
+                  <div class="col-4">
+                    <div class="view overlay image" *ngIf="infoBooking.bookingVilla == 'Biclén'">
+                      <img class="card-img-top" src="assets/biclen.jpg" alt="Card image cap">
+                    </div>
+                    <div class="view overlay image" *ngIf="infoBooking.bookingVilla == 'Daniela'">
+                      <img class="card-img-top" src="assets/daniela.jpg" alt="Card image cap">
+                    </div>
+                    <div class="col-12 btn-position">
+                      <button type="button" class="btn btn-info btn-style"
+                        (click)="getBooking(infoBooking._id)">EDIT</button>
+                    </div>
+                  </div>
+                  <!-- Card content -->
+                  <div class="card-body">
+                    <div class="col-10">
+                      <!-- Title -->
+                      <h4 class="card-title"><i class="far fa-id-card"></i><b>Guest Name:</b>
+                        {{infoBooking.bookingFullName}}</h4>
+                      <hr>
+                      <!-- Text -->
+                      <div class="col bg-secondary text-white">
+                        <div class="row">
+                          <div class="col-6">
+                            <p class="vcenter"><i class="fas fa-plane-arrival"></i> <b>Arrival:</b>
+                              {{infoBooking.bookingArrival}}</p>
+                          </div>
+                          <div class="col-6">
+                            <p><i class="fas fa-plane-departure vcenter"></i> <b>Departure:</b>
+                              {{infoBooking.bookingDeparture}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <ul class="list-group size-ul">
+                        <li class="list-group-item"><i class="fas fa-envelope-open-text"></i>
+                          <b>Mail: </b>
+                          <a
+                            href="mailto:{{infoBooking.bookingMail}}">{{infoBooking.bookingMail}}</a>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-phone-square"></i>
+                          <b>Phone: </b> <a href="tel:{{infoBooking.bookingPhone}}">
+                            {{infoBooking.bookingPhone}}</a>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-home"></i> <b>Villa:</b>
+                          {{infoBooking.bookingVilla}}</li>
+                        <li class="list-group-item"><i class="fas fa-users"></i> <b>Guests:</b>
+                          {{infoBooking.bookingGuests}}</li>
+                        <li class="list-group-item"><i class="fas fa-comments"></i> <b>Comments:</b>
+                          {{infoBooking.bookingComments}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Component de reservas APROBADAS-->
+
+    <section class="approved">
+      <div class="" id="headingThree">
+        <h2 class="mb-0">
+          <div class="centrar">
+            <button class="btn btn-success botones" type="button" data-toggle="collapse"
+              data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+              RESERVATIONS APPROVED
+            </button>
+          </div>
+        </h2>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+        data-parent="#accordionExample">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>RESERVATIONS APPROVED</h1>
+          </div>
+          <div class="col-12" *ngFor="let infoBooking of _data.data; let i = index">
+            <div class="showing-cards"
+              *ngIf="infoBooking.bookingApproved == true && infoBooking.bookingStored == false">
+              <!-- Card -->
+              <div class="card">
+                <div class="row">
+                  <!-- Card image -->
+                  <div class="col-4">
+                    <div class="view overlay image" *ngIf="infoBooking.bookingVilla == 'Biclén'">
+                      <img class="card-img-top" src="assets/biclen.jpg" alt="Card image cap">
+                    </div>
+                    <div class="view overlay image" *ngIf="infoBooking.bookingVilla == 'Daniela'">
+                      <img class="card-img-top" src="assets/daniela.jpg" alt="Card image cap">
+                    </div>
+                    <div class="col-12 btn-position">
+                      <button type="button" class="btn btn-info btn-style"
+                        (click)="getBooking(infoBooking._id)">EDIT</button>
+                    </div>
+                  </div>
+                  <!-- Card content -->
+                  <div class="card-body">
+                    <div class="col-10">
+                      <!-- Title -->
+                      <h4 class="card-title"><i class="far fa-id-card"></i><b>Guest Name:</b>
+                        {{infoBooking.bookingFullName}}</h4>
+                      <hr>
+                      <!-- Text -->
+                      <div class="col bg-secondary text-white">
+                        <div class="row">
+                          <div class="col-6">
+                            <p class="vcenter"><i class="fas fa-plane-arrival"></i> <b>Arrival:</b>
+                              {{infoBooking.bookingArrival}}</p>
+                          </div>
+                          <div class="col-6">
+                            <p><i class="fas fa-plane-departure vcenter"></i> <b>Departure:</b>
+                              {{infoBooking.bookingDeparture}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <ul class="list-group size-ul">
+                        <li class="list-group-item"><i class="fas fa-envelope-open-text"></i>
+                          <b>Mail: </b>
+                          <a
+                            href="mailto:{{infoBooking.bookingMail}}">{{infoBooking.bookingMail}}</a>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-phone-square"></i>
+                          <b>Phone: </b> <a href="tel:{{infoBooking.bookingPhone}}">
+                            {{infoBooking.bookingPhone}}</a>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-home"></i> <b>Villa:</b>
+                          {{infoBooking.bookingVilla}}</li>
+                        <li class="list-group-item"><i class="fas fa-users"></i> <b>Guests:</b>
+                          {{infoBooking.bookingGuests}}</li>
+                        <li class="list-group-item"><i class="fas fa-comments"></i> <b>Comments:</b>
+                          {{infoBooking.bookingComments}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Componente de reservas ALMACENADAS -->
+
+    <section class="stored">
+      <div class="" id="headingFour">
+        <h2 class="mb-0">
+          <div class="centrar">
+            <button class="btn btn-secondary botones" type="button" data-toggle="collapse"
+              data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              STORED RESERVATIONS
+            </button>
+          </div>
+        </h2>
+      </div>
+      <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+        data-parent="#accordionExample">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>STORED RESERVATIONS</h1>
+          </div>
+          <div class="col-12" *ngFor="let infoBooking of _data.data; let i = index">
+            <div class="showing-cards" *ngIf="infoBooking.bookingStored == true">
+              <!-- Card -->
+              <div class="card">
+                <div class="row">
+                  <!-- Card image -->
+                  <div class="col-4">
+                    <div class="view overlay image" *ngIf="infoBooking.bookingVilla == 'Biclén'">
+                      <img class="card-img-top" src="assets/biclen.jpg" alt="Card image cap">
+                    </div>
+                    <div class="view overlay image" *ngIf="infoBooking.bookingVilla == 'Daniela'">
+                      <img class="card-img-top" src="assets/daniela.jpg" alt="Card image cap">
+                    </div>
+                    <div class="col-12 btn-position">
+                      <button type="button" class="btn btn-info btn-style"
+                        (click)="getBooking(infoBooking._id)">EDIT</button>
+                    </div>
+                    <div class="col-12 btn-position">
+                      <button type="button" class="btn btn-danger btn-style"
+                        (click)="delBooking(infoBooking._id)">DELETE</button>
+                    </div>
+                  </div>
+                  <!-- Card content -->
+                  <div class="card-body">
+                    <div class="col-10">
+                      <!-- Title -->
+                      <h4 class="card-title"><i class="far fa-id-card"></i><b>Guest Name:</b>
+                        {{infoBooking.bookingFullName}}</h4>
+                      <hr>
+                      <!-- Text -->
+                      <div class="col bg-secondary text-white">
+                        <div class="row">
+                          <div class="col-6">
+                            <p class="vcenter"><i class="fas fa-plane-arrival"></i> <b>Arrival:</b>
+                              {{infoBooking.bookingArrival}}</p>
+                          </div>
+                          <div class="col-6">
+                            <p><i class="fas fa-plane-departure vcenter"></i> <b>Departure:</b>
+                              {{infoBooking.bookingDeparture}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <ul class="list-group size-ul">
+                        <li class="list-group-item"><i class="fas fa-envelope-open-text"></i>
+                          <b>Mail: </b>
+                          <a
+                            href="mailto:{{infoBooking.bookingMail}}">{{infoBooking.bookingMail}}</a>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-phone-square"></i>
+                          <b>Phone: </b> <a href="tel:{{infoBooking.bookingPhone}}">
+                            {{infoBooking.bookingPhone}}</a>
+                        </li>
+                        <li class="list-group-item"><i class="fas fa-home"></i> <b>Villa:</b>
+                          {{infoBooking.bookingVilla}}</li>
+                        <li class="list-group-item"><i class="fas fa-users"></i> <b>Guests:</b>
+                          {{infoBooking.bookingGuests}}</li>
+                        <li class="list-group-item"><i class="fas fa-comments"></i> <b>Comments:</b>
+                          {{infoBooking.bookingComments}}</li>
+                        <li class="list-group-item"><i class="fas fa-question"></i> <b>Status:</b>
+                          <span *ngIf="infoBooking.bookingPayment == false">
+                            was <b>pending</b></span>
+                          <span *ngIf="infoBooking.bookingPayment == true">
+                            was <b>paid</b></span>
+                          <span *ngIf="infoBooking.bookingApproved == true">
+                            was <b>approved</b></span>
+                          <span *ngIf="infoBooking.bookingStored == true">
+                            is <b>stored</b></span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Card -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cierre accordion -->
+  </div>
+
+  <hr>
+
+  <!-- Formulario editar reserva -->
+
+  <section class="edit-booking">
+    <div *ngIf="activateEdit == true">
+      <div class="row">
+        <div class="col-12">
+          <div>
+            <h1>EDIT RESERVATION</h1>
+            <button type="button" class="btn btn-primary" (click)="closeEdit()">CLOSE</button>
+            <div class="col-6 form-group">
+              <label>Full Name</label>
+              <input type="text" class="form-control" id="fullName" placeholder="John Doe"
+                [(ngModel)]="_data.oneData['bookingFullName']">
+            </div>
+            <div class="col-6 form-group">
+              <label>email</label>
+              <input type="email" class="form-control" id="eMail" placeholder="myname@gmail.com"
+                [(ngModel)]="_data.oneData['bookingMail']">
+              <small class="form-text text-muted">We'll never share your
+                email with anyone else.</small>
+            </div>
+            <div class="col-6 form-group">
+              <label>Phone</label>
+              <input type="number" class="form-control" id="phone" placeholder="123456789"
+                [(ngModel)]="_data.oneData['bookingPhone']">
+              <small class="form-text text-muted">We'll never share your
+                phone with anyone else.</small>
+            </div>
+            <div class="form-inline">
+              <div class="form-group mb-2">
+                <input type="text" readonly class="form-control-plaintext" value="Booking Arrival">
+              </div>
+              <div class="form-group mx-sm-3 mb-2">
+                <input type="date" class="form-control" [(ngModel)]="_data.oneData['bookingArrival']"
+                  id="arrival" name="trip-start" min="2019-01-01" max="2025-12-31">
+              </div>
+              <div class="form-group mb-2">
+                <input type="text" readonly class="form-control-plaintext"
+                  value="Booking Departure">
+              </div>
+              <div class="form-group mx-sm-3 mb-2">
+                <input type="date" class="form-control" [(ngModel)]="_data.oneData['bookingDeparture']"
+                  id="departure" name="trip-start" min="2019-01-01" max="2025-12-31">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 form-group">
+                <label for="selectVilla">Select one of our villas:</label>
+                <select class="form-control" id="selectVilla"
+                  [(ngModel)]="_data.oneData['bookingVilla']">
+                  <option *ngFor="let v of villas" [ngValue]="v">{{v}}</option>
+                </select>
+              </div>
+              <div class="col-3 form-group">
+                <label for="selectedGuest">Select number of guests:</label>
+                <select class="form-control" id="selectedGuest"
+                  [(ngModel)]="_data.oneData['bookingGuests']">
+                  <option *ngFor="let g of chooseGuests" [ngValue]="g">{{g}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="observations">Special guest(s) request / Booking follow up</label>
+              <textarea class="form-control" id="observations" rows="5"
+                placeholder="We travel with pets, I am vegetarian, we love getting up late..."
+                [(ngModel)]="_data.oneData['bookingComments']"></textarea>
+            </div>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox"
+                [(ngModel)]="_data.oneData['bookingPayment']" [ngModelOptions]="{standalone: false}">
+              <label class="form-check-label" for="inlineCheckbox2">Payment process</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox"
+                [(ngModel)]="_data.oneData['bookingApproved']" [ngModelOptions]="{standalone: false}">
+              <label class="form-check-label" for="inlineCheckbox2">Reservations approved</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox"
+                [(ngModel)]="_data.oneData['bookingStored']" [ngModelOptions]="{standalone: false}">
+              <label class="form-check-label" for="inlineCheckbox2">Stored reservations</label>
+            </div>
+
+            <div class="col-12">
+              <div *ngIf="flagAlert == true" class="alert alert-danger text-center" role="alert">
+                Fields with * are required
+              </div>
+              <button type="button" class="btn btn-info" (click)="editBooking()"
+                >EDIT
+                BOOKING</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </section>
+
+  <!-- Formulario New Booking -->
+
+  <section class="new-booking">
+    <div *ngIf="activateNew == true">
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <h1>NEW RESERVATION</h1>
+          <div class="col-6 form-group">
+            <label>Full Name *</label>
+            <input type="text" class="form-control" id="fullName" placeholder="John Doe"
+              [(ngModel)]="fullName">
+          </div>
+          <div class="col-6 form-group">
+            <label>email *</label>
+            <input type="email" class="form-control" id="eMail" placeholder="myname@gmail.com"
+              [(ngModel)]="email">
+            <small class="form-text text-muted">We'll never share your
+              email with anyone else.</small>
+          </div>
+          <div class="col-6 form-group">
+            <label>Phone *</label>
+            <input type="number" class="form-control" id="phone" placeholder="123456789"
+              [(ngModel)]="phone">
+            <small class="form-text text-muted">We'll never share your
+              phone with anyone else.</small>
+          </div>
+          <div class="form-inline">
+            <div class="form-group mb-2">
+              <input type="text" readonly class="form-control-plaintext" value="Booking Arrival *">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <input type="date" class="form-control" [(ngModel)]="arrival" id="arrival"
+                name="trip-start" min="2019-01-01" max="2025-12-31">
+            </div>
+            <div class="form-group mb-2">
+              <input type="text" readonly class="form-control-plaintext" value="Booking Departure *">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+              <input type="date" class="form-control" [(ngModel)]="departure" id="departure"
+                name="trip-start" min="2019-01-01" max="2025-12-31">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3 form-group">
+              <label for="selectVilla">Select one of our villas: *</label>
+              <select class="form-control" id="selectVilla" [(ngModel)]="villa">
+                <option *ngFor="let v of villas" [ngValue]="v">{{v}}</option>
+              </select>
+            </div>
+            <div class="col-3 form-group">
+              <label for="selectedGuest">Select number of guests: *</label>
+              <select class="form-control" id="selectedGuest" [(ngModel)]="guests">
+                <option *ngFor="let g of chooseGuests" [ngValue]="g">{{g}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="observations">Do you have a special request?</label>
+            <textarea class="form-control" id="observations" rows="5"
+              placeholder="We travel with pets, I am vegetarian, we love getting up late..."
+              [(ngModel)]="comments"></textarea>
+          </div>
+          <div class="col-12">
+            <div *ngIf="flagAlert == true" class="alert alert-danger text-center" role="alert">
+              Fields with * are required
+            </div>
+            <button type="button" class="btn btn-info" (click)="addBooking()"
+              >CREATE NEW
+              BOOKING</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+</div>

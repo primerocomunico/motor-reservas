@@ -1,0 +1,117 @@
+<div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 col-md-push-5">
+          <div class="booking-cta">
+            <h1>Make your reservation</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi facere, soluta magnam
+              consectetur molestias itaque
+              ad sint fugit architecto incidunt iste culpa perspiciatis possimus voluptates aliquid
+              consequuntur cumque quasi.
+              Perspiciatis.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+          <div class="booking-form">
+            <div class="form-group">
+              <span class="form-label">YOUR NAME *</span>
+              <input class="form-control" type="text" placeholder="Enter your fullname"
+                [(ngModel)]="fullName">
+            </div>
+            <div class="form-group">
+              <span class="form-label">YOUR MAIL *</span>
+              <input class="form-control" type="text"
+                placeholder="We'll never share it with anyone else" [(ngModel)]="email">
+            </div>
+            <div class="form-group">
+              <span class="form-label">YOUR PHONE *</span>
+              <input class="form-control" type="text" placeholder="Just to confirm your booking"
+                [(ngModel)]="phone">
+            </div>
+            <div class="row">
+              <div class="col-6 col-sm-6">
+                <div class="form-group">
+                  <span class="form-label">CHECK IN *</span>
+                  <input class="form-control" type="date"min="2019-01-01" max="2025-12-31"
+                    [(ngModel)]="arrival">
+                </div>
+              </div>
+              <div class="col-6 col-sm-6">
+                <div class="form-group">
+                  <span class="form-label">CHECK OUT *</span>
+                  <input class="form-control" type="date" min="2019-01-01" max="2025-12-31"
+                    [(ngModel)]="departure">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 col-sm-6">
+                <div class="form-group">
+                  <span class="form-label">VILLAS *</span>
+                  <select class="form-control" id="selectVilla" [(ngModel)]="villa">
+                    <option *ngFor="let v of villas" [ngValue]="v">{{v}}</option>
+                  </select>
+                  <span class="select-arrow"></span>
+                </div>
+              </div>
+              <div class="col-6 col-sm-6">
+                <div class="form-group">
+                  <span class="form-label">GUESTS *</span>
+                  <select class="form-control" id="selectedGuest" [(ngModel)]="guests">
+                    <option *ngFor="let g of chooseGuests" [ngValue]="g">{{g}}</option>
+                  </select>
+                  <span class="select-arrow"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="observations"><b>SPECIAL REQUEST / COMMENTS</b></label>
+              <textarea class="form-control" id="observations" rows="5"
+                placeholder="Do we have to consider a special request?"
+                [(ngModel)]="comments"></textarea>
+            </div>
+            <div class="form-btn">
+              <div *ngIf="flagAlert == true" class="alert alert-danger text-center" role="alert">
+                Fields with * are required
+              </div>
+              <div *ngIf="_data.flagAlert == true" class="alert alert-success text-center" role="alert">
+                Thanks for booking with us! You will received an email with next steps.
+              </div>
+              <button type="button" class="submit-btn" (click)="addBooking()">SEND RESERVATION</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+      <hr>
+      <div class="row">
+        <div class="col-12" *ngFor="let infoBooking of _data.data; let i = index">
+          <div class="card">
+            <div class="card-header">
+              A happy booking!
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"> Reservation: {{infoBooking.bookingArrival}} -
+                {{infoBooking.bookingDeparture}}</h5>
+              <p class="card-text" *ngIf="infoBooking.bookingStatus == false">This reservation is
+                pending approval.</p>
+              <p class="card-text" *ngIf="infoBooking.bookingStatus == true">These days are
+                reserved for a visit.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

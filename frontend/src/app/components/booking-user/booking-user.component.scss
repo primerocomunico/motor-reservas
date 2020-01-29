@@ -1,0 +1,81 @@
+.welcome {
+  text-align: center;
+  margin-top: 10px;
+}
+
+label {
+  display: block;
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+  margin: .4rem 0;
+}
+
+.card {
+  margin: 10px 0;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.status {
+  margin-top: 10px;
+}
+
+.centrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .botones {
+    width: 300px;
+    margin: 5px 0;
+  }
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+.image {
+  margin: 15px 0 0 15px;
+}
+
+.vcenter {
+   line-height: 24px;
+   padding-top: 15px;
+}
+
+li {
+    .fas {
+      font-size: 20px;
+      color: grey;
+      margin-right: 5px;
+  }
+}
+
+.fas {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.far {
+  margin-right: 5px;
+}
+
+.btn-position {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .btn-style {
+    width: 100px;
+    height: 50px;
+    vertical-align: auto;
+    margin: 10px 0 10px 0;
+  }
+}
+
+// limitar el tamaño de la card si el exto es muy largo
+.size-ul {
+  width: 570px;
+  overflow: auto;
+}
